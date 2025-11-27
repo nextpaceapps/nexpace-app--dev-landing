@@ -1,0 +1,203 @@
+@use '../styles/variables' as *;
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: $bg-main;
+  padding-top: 5rem;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(217, 70, 239, 0.3);
+  background: rgba(217, 70, 239, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.badgeDot {
+  position: relative;
+  display: flex;
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.badgePing {
+  position: absolute;
+  display: inline-flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 9999px;
+  background: $secondary;
+  opacity: 0.75;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.badgeDotInner {
+  position: relative;
+  display: inline-flex;
+  border-radius: 9999px;
+  height: 0.5rem;
+  width: 0.5rem;
+  background: $secondary;
+}
+
+.badgeText {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(196, 181, 253, 1);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.heading {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: $text-primary;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+
+  @media (min-width: 768px) {
+    font-size: 6rem;
+  }
+}
+
+.headingGradient {
+  background: linear-gradient(to right, #22d3ee, $secondary, #22d3ee);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-x 3s ease infinite;
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.description {
+  color: $text-secondary;
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+  line-height: 1.75;
+  font-weight: 300;
+  pointer-events: auto;
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.button {
+  position: relative;
+  padding: 1rem 2rem;
+  background: $text-primary;
+  color: $text-inverse;
+  font-weight: 700;
+  font-size: 1.125rem;
+  transform: skewX(-12deg);
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #22d3ee;
+  }
+}
+
+.buttonContent {
+  transform: skewX(12deg);
+}
+
+.buttonBorder {
+  position: absolute;
+  inset: 0;
+  border: 1px solid $text-primary;
+  transform: translate(0.25rem, 0.25rem);
+  z-index: -10;
+  transition: transform 0.3s;
+
+  .button:hover & {
+    transform: translate(0.5rem, 0.5rem);
+  }
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $text-tertiary;
+  z-index: 10;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-0.25rem);
+  }
+}
+

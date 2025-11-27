@@ -1,0 +1,275 @@
+@use '../styles/variables' as *;
+
+.section {
+  padding: 6rem 0;
+  background: $bg-main;
+  position: relative;
+  overflow: hidden;
+}
+
+.radialGradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 100%, rgba(6, 182, 212, 0.1), rgba(0, 0, 0, 0) 50%);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 10;
+
+  @media (min-width: 640px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 2rem;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.badgeContent {
+  padding: 0.25rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: $text-primary;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.05em;
+
+  @media (min-width: 768px) {
+    font-size: 3.75rem;
+  }
+}
+
+.titleGradient {
+  background: linear-gradient(to right, $primary, $secondary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: $text-secondary;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $border-default;
+  border-radius: 1rem;
+  transition: all 0.3s;
+}
+
+.cardHeader {
+  margin-bottom: 1.5rem;
+}
+
+.iconContainer {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background: $bg-main;
+  border: 1px solid $border-default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  transition: transform 0.3s;
+
+  .card:hover & {
+    transform: scale(1.1);
+  }
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 0.25rem;
+}
+
+.cardDesc {
+  font-size: 0.75rem;
+  color: $text-secondary;
+  height: 2rem;
+}
+
+.priceSection {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid $border-default;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 900;
+  background: linear-gradient(to right, $primary, #0891b2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.timeInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #d1d5db;
+  font-family: monospace;
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: $text-secondary;
+  transition: color 0.3s;
+
+  .card:hover & {
+    color: #e5e7eb;
+  }
+}
+
+.featureIcon {
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+}
+
+.hoverGlow {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  background: linear-gradient(to bottom right, $primary, #0891b2);
+
+  .card:hover & {
+    opacity: 0.05;
+  }
+}
+
+.cta {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.ctaButton {
+  padding: 1rem 2rem;
+  background: $text-primary;
+  color: $text-inverse;
+  font-weight: 700;
+  border-radius: 9999px;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: $primary;
+  }
+}
+
+// Color variants
+.iconCyan {
+  color: $primary;
+}
+
+.iconFuchsia {
+  color: $secondary;
+}
+
+.iconViolet {
+  color: #a78bfa;
+}
+
+.iconBlue {
+  color: #60a5fa;
+}
+
+.priceCyan {
+  background: linear-gradient(to right, #22d3ee, #0891b2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.priceFuchsia {
+  background: linear-gradient(to right, $secondary, #c026d3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.priceViolet {
+  background: linear-gradient(to right, #a78bfa, #7c3aed);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.priceBlue {
+  background: linear-gradient(to right, #60a5fa, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+

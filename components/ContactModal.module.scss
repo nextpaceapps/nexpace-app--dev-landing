@@ -1,0 +1,195 @@
+@use '../styles/variables' as *;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.modalWrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.modal {
+  background: $bg-secondary;
+  border: 1px solid $border-default;
+  width: 100%;
+  max-width: 32rem;
+  border-radius: 1rem;
+  box-shadow: $shadow-modal;
+  overflow: hidden;
+  pointer-events: auto;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid $border-default;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.headerTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $text-primary;
+  letter-spacing: -0.025em;
+}
+
+.closeButton {
+  padding: 0.5rem;
+  border-radius: 9999px;
+  transition: all 0.3s;
+  color: $text-secondary;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: $text-primary;
+  }
+}
+
+.content {
+  padding: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  background: $bg-main;
+  border: 1px solid $border-default;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: $text-primary;
+  transition: all 0.3s;
+  outline: none;
+
+  &:focus {
+    border-color: $primary;
+  }
+
+  &::placeholder {
+    color: $text-tertiary;
+  }
+}
+
+.textarea {
+  @extend .input;
+  resize: none;
+  min-height: 8rem;
+}
+
+.submitButton {
+  width: 100%;
+  background: linear-gradient(to right, $primary, #2563eb);
+  color: $text-primary;
+  font-weight: 700;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: $shadow-button;
+  }
+}
+
+.submitNote {
+  text-align: center;
+  font-size: 0.75rem;
+  color: $text-tertiary;
+  margin-top: 0.75rem;
+}
+
+.successContent {
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.successIcon {
+  width: 5rem;
+  height: 5rem;
+  background: rgba(34, 197, 94, 0.2);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: #22c55e;
+}
+
+.successTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 0.5rem;
+}
+
+.successMessage {
+  color: $text-secondary;
+  margin-bottom: 2rem;
+  max-width: 20rem;
+}
+
+.closeButtonSecondary {
+  padding: 0.75rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: $text-primary;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.decorativeLine {
+  height: 0.25rem;
+  width: 100%;
+  background: linear-gradient(to right, $primary, $secondary);
+}
+

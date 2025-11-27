@@ -1,0 +1,57 @@
+@use '../styles/variables' as *;
+
+.container {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: $bg-main;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: -0.05em;
+  background: linear-gradient(to bottom, $text-primary, #a5f3fc, $primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px rgba(34, 211, 238, 0.5));
+
+  @media (min-width: 768px) {
+    font-size: 8rem;
+  }
+}
+
+.divider {
+  height: 2px;
+  background: $secondary;
+  margin: 1.5rem 0;
+  box-shadow: 0 0 15px magenta;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $text-primary;
+
+  @media (min-width: 768px) {
+    font-size: 1.875rem;
+  }
+}
+

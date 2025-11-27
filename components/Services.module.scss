@@ -1,0 +1,179 @@
+@use '../styles/variables' as *;
+
+.section {
+  padding: 6rem 0;
+  background: $bg-main;
+  position: relative;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (min-width: 640px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 2rem;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+.divider {
+  height: 0.25rem;
+  background: linear-gradient(to right, $primary, $secondary);
+  width: 6.25rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 6rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  padding: 2rem;
+  border: 1px solid $border-default;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgba(6, 182, 212, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-0.625rem);
+  }
+}
+
+.iconContainer {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.5);
+  width: fit-content;
+  border: 1px solid $border-default;
+  transition: border-color 0.3s;
+
+  .card:hover & {
+    border-color: $primary;
+  }
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  color: $primary;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s;
+
+  .card:hover & {
+    color: $primary;
+  }
+}
+
+.cardDescription {
+  color: $text-secondary;
+  line-height: 1.75;
+}
+
+.techContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  opacity: 0.8;
+
+  @media (min-width: 768px) {
+    gap: 4rem;
+  }
+}
+
+.techItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.techIcon {
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.techLabel {
+  color: $text-secondary;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.iconCyan {
+  color: $primary;
+}
+
+.iconFuchsia {
+  color: $secondary;
+}
+
+.techTextLarge {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.techTextMedium {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+.techSvg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.techSvgLarge {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+

@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Zap, Code, Layers, Rocket, Clock, Ban } from 'lucide-react';
 import { SharedProps } from '../types';
+import styles from './Pricing.module.scss';
 
 const tiers = [
   {
@@ -89,19 +89,35 @@ const tiers = [
 ];
 
 const Pricing: React.FC<SharedProps> = ({ onOpenContact }) => {
+  const getIconClass = (iconColor: string) => {
+    if (iconColor.includes('cyan')) return styles.iconCyan;
+    if (iconColor.includes('fuchsia')) return styles.iconFuchsia;
+    if (iconColor.includes('violet')) return styles.iconViolet;
+    if (iconColor.includes('blue')) return styles.iconBlue;
+    return styles.iconCyan;
+  };
+
+  const getPriceClass = (color: string) => {
+    if (color.includes('cyan-400')) return styles.priceCyan;
+    if (color.includes('fuchsia')) return styles.priceFuchsia;
+    if (color.includes('violet')) return styles.priceViolet;
+    if (color.includes('blue')) return styles.priceBlue;
+    return styles.priceCyan;
+  };
+
   return (
-    <section id="pricing" className="py-24 bg-black relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,_rgba(6,182,212,0.1),_rgba(0,0,0,0)_50%)]" />
+    <section id="pricing" className={styles.section}>
+      <div className={styles.radialGradient} />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
+      <div className={styles.container}>
+        <div className={styles.header}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center gap-2 mb-4"
+            className={styles.badge}
           >
-            <span className="px-4 py-1 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-sm font-bold flex items-center gap-2">
+            <span className={styles.badgeContent}>
               <Ban size={16} /> NO HOURLY RATES
             </span>
           </motion.div>
@@ -111,10 +127,10 @@ const Pricing: React.FC<SharedProps> = ({ onOpenContact }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter"
+            className={styles.title}
           >
             FIXED PRICE. <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-500">
+            <span className={styles.titleGradient}>
               EXTREME SPEED.
             </span>
           </motion.h2>
@@ -124,13 +140,13 @@ const Pricing: React.FC<SharedProps> = ({ onOpenContact }) => {
              whileInView={{ opacity: 1 }}
              viewport={{ once: true }}
              transition={{ delay: 0.2 }}
-             className="text-xl text-gray-400 max-w-2xl mx-auto"
+             className={styles.subtitle}
           >
             You pay for outcomes, not time. We leverage our speed to give you better prices while delivering faster than anyone else.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className={styles.grid}>
           {tiers.map((tier, index) => (
             <motion.div
               key={tier.id}
@@ -138,40 +154,40 @@ const Pricing: React.FC<SharedProps> = ({ onOpenContact }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`group relative p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all duration-300 ${tier.borderColor} ${tier.shadow}`}
+              className={styles.card}
             >
               {/* Header */}
-              <div className="mb-6">
-                <div className={`w-12 h-12 rounded-lg bg-black border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <tier.icon className={`w-6 h-6 ${tier.iconColor}`} />
+              <div className={styles.cardHeader}>
+                <div className={styles.iconContainer}>
+                  <tier.icon className={`${styles.icon} ${getIconClass(tier.iconColor)}`} />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-1">{tier.name}</h3>
-                <p className="text-xs text-gray-400 h-8">{tier.desc}</p>
+                <h3 className={styles.cardTitle}>{tier.name}</h3>
+                <p className={styles.cardDesc}>{tier.desc}</p>
               </div>
 
               {/* Price & Time */}
-              <div className="mb-6 pb-6 border-b border-white/10">
-                <div className={`text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r ${tier.color}`}>
+              <div className={styles.priceSection}>
+                <div className={`${styles.price} ${getPriceClass(tier.color)}`}>
                   {tier.price}
                 </div>
-                <div className="flex items-center gap-2 mt-2 text-sm text-gray-300 font-mono">
-                  <Clock size={14} className={tier.iconColor} />
+                <div className={styles.timeInfo}>
+                  <Clock size={14} className={getIconClass(tier.iconColor)} />
                   {tier.time}
                 </div>
               </div>
 
               {/* Features List */}
-              <ul className="space-y-3 mb-8">
+              <ul className={styles.featuresList}>
                 {tier.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-gray-400 group-hover:text-gray-200 transition-colors">
-                    <Check size={16} className={`mt-0.5 shrink-0 ${tier.iconColor}`} />
-                    <span className="leading-tight">{feature}</span>
+                  <li key={idx} className={styles.featureItem}>
+                    <Check size={16} className={`${styles.featureIcon} ${getIconClass(tier.iconColor)}`} />
+                    <span>{feature}</span>
                   </li>
                 ))}
               </ul>
 
               {/* Hover Glow Effect */}
-              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${tier.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`} />
+              <div className={styles.hoverGlow} />
             </motion.div>
           ))}
         </div>
@@ -181,11 +197,11 @@ const Pricing: React.FC<SharedProps> = ({ onOpenContact }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="mt-16 text-center"
+          className={styles.cta}
         >
           <button 
             onClick={onOpenContact}
-            className="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-cyan-400 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            className={styles.ctaButton}
           >
             Start a Micro-Project
           </button>

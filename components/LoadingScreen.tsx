@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LoadingProps } from '../types';
+import styles from './LoadingScreen.module.scss';
 
 const LoadingScreen: React.FC<LoadingProps> = ({ onComplete }) => {
   useEffect(() => {
@@ -13,9 +14,9 @@ const LoadingScreen: React.FC<LoadingProps> = ({ onComplete }) => {
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden">
+    <div className={styles.container}>
       <motion.div
-        className="relative z-10 flex flex-col items-center justify-center p-4"
+        className={styles.content}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ 
@@ -29,7 +30,7 @@ const LoadingScreen: React.FC<LoadingProps> = ({ onComplete }) => {
             initial={{ scale: 0.8, filter: 'blur(10px)', opacity: 0 }}
             animate={{ scale: 1, filter: 'blur(0px)', opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="text-5xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-200 to-cyan-500 drop-shadow-[0_0_30px_rgba(34,211,238,0.5)] text-center tracking-tighter"
+            className={styles.title}
          >
            NEXT PACE
          </motion.h1>
@@ -38,14 +39,14 @@ const LoadingScreen: React.FC<LoadingProps> = ({ onComplete }) => {
           initial={{ width: 0, opacity: 0 }}
           animate={{ width: "100%", opacity: 1 }}
           transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-          className="h-[2px] bg-fuchsia-500 my-6 shadow-[0_0_15px_magenta]"
+          className={styles.divider}
          />
 
          <motion.p
            initial={{ opacity: 0, y: 20, letterSpacing: '0.2em' }}
            animate={{ opacity: 1, y: 0, letterSpacing: '0.8em' }}
            transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
-           className="text-lg md:text-3xl text-white font-bold uppercase"
+           className={styles.subtitle}
          >
            Development
          </motion.p>

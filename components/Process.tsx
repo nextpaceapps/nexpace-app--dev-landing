@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Rocket, CheckCircle, Clock, ArrowRight } from 'lucide-react';
 import { SharedProps } from '../types';
+import styles from './Process.module.scss';
 
 const processSteps = [
   { 
@@ -54,39 +54,48 @@ const processSteps = [
 ];
 
 const Process: React.FC<SharedProps> = ({ onOpenContact }) => {
-  return (
-    <section id="process" className="py-24 bg-neutral-900 relative overflow-hidden">
-      {/* Background Grid */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:100px_100px]" />
+  const getBarClass = (color: string) => {
+    if (color === 'bg-gray-600') return styles.barGray;
+    if (color === 'bg-cyan-500') return styles.barCyan;
+    if (color === 'bg-fuchsia-500') return styles.barFuchsia;
+    if (color === 'bg-cyan-400') return styles.barCyanLight;
+    if (color === 'bg-white') return styles.barWhite;
+    return styles.barCyan;
+  };
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
+  return (
+    <section id="process" className={styles.section}>
+      {/* Background Grid */}
+      <div className={styles.gridBackground} />
+
+      <div className={styles.container}>
+        <div className={styles.header}>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold text-white mb-4"
+            className={styles.title}
           >
             EXECUTION TIMELINE
           </motion.h2>
-          <div className="h-1 bg-gradient-to-r from-fuchsia-500 to-cyan-500 w-24 mx-auto" />
-          <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+          <div className={styles.divider} />
+          <p className={styles.description}>
             Our streamlined workflow ensures we move from concept to code without friction.
           </p>
         </div>
 
         {/* Gantt Chart Container */}
-        <div className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-10 mb-16 overflow-x-auto">
-          <div className="min-w-[700px]">
+        <div className={styles.ganttContainer}>
+          <div className={styles.ganttInner}>
             {/* Time Markers */}
-            <div className="flex justify-between text-xs text-gray-500 uppercase tracking-widest mb-6 border-b border-white/5 pb-2">
+            <div className={styles.timeMarkers}>
               <span>Start</span>
               <span>Week 1</span>
               <span>Week 2</span>
               <span>Launch</span>
             </div>
 
-            <div className="space-y-8">
+            <div className={styles.stepsList}>
               {processSteps.map((step, index) => (
                 <motion.div 
                   key={step.id}
@@ -94,21 +103,21 @@ const Process: React.FC<SharedProps> = ({ onOpenContact }) => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.15 }}
-                  className="relative group"
+                  className={styles.step}
                 >
                   {/* Label Row */}
-                  <div className="flex items-center justify-between mb-2 px-1">
-                    <h4 className="text-sm font-bold text-gray-200 group-hover:text-white transition-colors">
+                  <div className={styles.stepHeader}>
+                    <h4 className={styles.stepTitle}>
                       {index + 1}. {step.title}
                     </h4>
-                    <span className="text-xs text-cyan-400 font-mono">{step.duration}</span>
+                    <span className={styles.stepDuration}>{step.duration}</span>
                   </div>
 
                   {/* Bar Track */}
-                  <div className="h-10 w-full bg-white/5 rounded-md relative overflow-hidden flex items-center">
+                  <div className={styles.barTrack}>
                     {/* Animated Bar */}
                     <motion.div
-                      className={`absolute top-0 bottom-0 rounded-md ${step.color} shadow-[0_0_15px_rgba(255,255,255,0.2)] flex items-center justify-end px-3`}
+                      className={`${styles.bar} ${getBarClass(step.color)}`}
                       style={{ left: step.offset }}
                       initial={{ width: 0 }}
                       whileInView={{ width: step.width }}
@@ -116,14 +125,14 @@ const Process: React.FC<SharedProps> = ({ onOpenContact }) => {
                       transition={{ duration: 1.2, delay: index * 0.2, ease: "circOut" }}
                     >
                       {step.isLaunch ? (
-                        <Rocket className="text-black w-5 h-5 animate-pulse" />
+                        <Rocket className={styles.rocketIcon} />
                       ) : (
-                        <div className="w-1 h-full bg-white/20 absolute right-0 top-0" />
+                        <div className={styles.barEnd} />
                       )}
                     </motion.div>
                     
                     {/* Description Tooltip (visible on hover) */}
-                    <div className="absolute left-[50%] md:left-[20%] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs text-gray-300 pointer-events-none bg-black/80 px-2 py-1 rounded border border-white/10 z-20 translate-x-10 group-hover:translate-x-0 transform transition-transform">
+                    <div className={styles.tooltip}>
                       {step.desc}
                     </div>
                   </div>
@@ -138,20 +147,20 @@ const Process: React.FC<SharedProps> = ({ onOpenContact }) => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center text-center"
+          className={styles.cta}
         >
-          <h3 className="text-2xl font-bold text-white mb-6">Ready to break the speed limit?</h3>
+          <h3 className={styles.ctaTitle}>Ready to break the speed limit?</h3>
           <button 
             onClick={onOpenContact}
-            className="group relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xl rounded-full overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(6,182,212,0.7)]"
+            className={styles.ctaButton}
           >
-            <span className="relative z-10 flex items-center gap-2">
-              START PROJECT <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            <span className={styles.ctaButtonContent}>
+              START PROJECT <ArrowRight className={styles.arrowIcon} />
             </span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            <div className={styles.ctaButtonOverlay} />
           </button>
-          <p className="mt-4 text-sm text-gray-500 flex items-center gap-2">
-            <Clock className="w-4 h-4" /> Response time: Under 2 hours
+          <p className={styles.ctaNote}>
+            <Clock className={styles.clockIcon} /> Response time: Under 2 hours
           </p>
         </motion.div>
       </div>
