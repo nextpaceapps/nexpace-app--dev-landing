@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Github, Code, Zap } from 'lucide-react';
+import { Github, Zap } from 'lucide-react';
 import { ThemeProvider } from '../theme';
 import LoadingScreen from './components/LoadingScreen';
 import Hero from './pages/Hero';
@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Services from './pages/Services';
 import Process from './pages/Process';
 import Pricing from './pages/Pricing';
+import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
 import styles from './App.module.scss';
 
@@ -78,6 +79,8 @@ const App: React.FC = () => {
                 </p>
               </div>
             </footer>
+
+            <Footer />
 
             <ContactModal isOpen={isContactOpen} onClose={handleCloseContact} />
           </motion.main>
